@@ -1,17 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <article-table :articles="articles" ></article-table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ArticleTable from './components/ArticleTable'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ArticleTable
+  },
+  data: function () {
+    return {
+      articles: []
+    }
+  },
+  methods: {
+    getArticles: function() {
+      fetch("/articles.json")
+        .then (resp => resp.json() 
+        )
+        .then (json => {
+            this.articles = json
+          }
+        )
+    }
+  },
+  created: function() {
+    this.getArticles()
   }
 }
 </script>
@@ -23,6 +41,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
