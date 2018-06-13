@@ -18,7 +18,9 @@ export default {
       articles: [],
       displayArticles: [],
       fetchCount: 0,
-      sortBy: ""
+      sortBy: "none",
+      sortWordsAsc: false,
+      sortSubAsc: false,
     }
   },
   methods: {
@@ -35,10 +37,12 @@ export default {
     loadMore: function() {
       if (this.articles.length > 0) {
         this.addArticles(10)
+        this.sortArticles(this.sortBy)
       } else if (this.articles.length === 0 && this.fetchCount < 2) {
           this.getArticles("/more-articles.json")
             .then(() => {
                 this.addArticles(10)
+                this.sortArticles(this.sortBy)
               } 
             ) 
       } else {
@@ -53,13 +57,15 @@ export default {
       this.sortBy = sortType
       switch (sortType) {
         case "words":
-          this.displayArticles.sort(this.compareWords)
+          this.sortWordsAsc = !this.sortWordsAsc
+          this.sortWordsAsc ? this.displayArticles.sort(this.compareWords) : this.displayArticles.sort(this.compareWordsReverse)
           break;
         case "submitted":
-          this.displayArticles.sort(this.compareSubmitted)
+          this.sortSubAsc = !this.sortSubAsc
+          this.sortSubAsc ? this.displayArticles.sort(this.compareSubmitted) : this.displayArticles.sort(this.compareSubmittedReversed)
           break;
         default:
-          throw "need sort type"
+          this.displayArticles.sort()
           break;
       }
     },
@@ -72,12 +78,32 @@ export default {
         return 0
       }
     },
+    compareWordsReverse: function(a, b) {
+      if (a.words > b.words) {
+        return -1;
+      } else if (a.words < b.words) {
+        return 1;
+      } else {
+        return 0
+      }
+    },
     compareSubmitted: function(a, b) {
       let aDate = new Date(a.publish_at)
       let bDate = new Date(b.publish_at)
       if (aDate < bDate) {
         return -1;
       } else if (aDate > bDate) {
+        return 1;
+      } else {
+        return 0
+      }
+    },
+    compareSubmittedReversed: function(a, b) {
+      let aDate = new Date(a.publish_at)
+      let bDate = new Date(b.publish_at)
+      if (aDate > bDate) {
+        return -1;
+      } else if (aDate < bDate) {
         return 1;
       } else {
         return 0
