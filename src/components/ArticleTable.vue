@@ -7,7 +7,7 @@
                 <th>Words</th>
                 <th>Submitted</th>
             </tr>
-            <article-row v-for="(article, key) in articles" :key="key" :article="article" ></article-row>
+            <article-row v-for="(article, key) in articles" :key="key" :index="key" :article="article" ></article-row>
         </table>    
     </div>
 </template>
@@ -27,6 +27,16 @@ export default {
     .article-table {
         table {
             width: 100%;
+            border-collapse: collapse;
+            th {
+                text-align: left;
+                padding: 20px 10px;
+                background: linear-gradient(#c21e46, #8b1130);
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: 900;
+                border: 1px #8b1130 solid;
+            }
         }
     }
 </style>

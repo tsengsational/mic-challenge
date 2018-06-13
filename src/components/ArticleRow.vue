@@ -1,15 +1,15 @@
 <template>
-    <tr>
-        <td>{{article.title}} </td>
-        <td>{{name}} </td>
-        <td>{{article.words}} </td>
-        <td>{{time}} </td>
+    <tr class="article-row" :class="{ even: isEven }"  >
+        <td class="article-title" ><div class="article-image" :style="imageStyle" ></div> <span class="title-text" ><a :href="article.url">{{article.title}}</a> </span>  </td>
+        <td class="article-author" >{{name}} </td>
+        <td class="article-words" >{{article.words}} </td>
+        <td class="article-submitted" >{{time}} </td>
     </tr>
 </template>
 
 <script>
 export default {
-    props: ["article"],
+    props: ["article", "index"],
     computed: {
         name: function() {
             return this.article.profile.first_name + " " + this.article.profile.last_name
@@ -40,11 +40,69 @@ export default {
                 timeParse = years + yearParse
             }
             return timeParse
+        },
+        isEven: function() {
+            let test = this.index % 2 === 0 ? true : false;
+            return test
+        },
+        imageStyle: function() {
+            return {
+                backgroundImage: `url(${this.article.image})`,
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '200px'
+            }
         }
     }
 }
 </script>
 
 <style lang="scss">
+    .article-row {
+        td {
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px #eaeaea solid;
+        }
 
+        .article-words {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .article-submitted {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .title-text {
+            color: #00567e;
+            font-weight: 600;
+            position: relative;
+            left: 10px;
+            font-size: 18px;
+            display: inline-block;
+            width: calc(100% - 120px);
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+
+        .article-author {
+            color: #00567e;
+            font-size: 14px;
+        }
+
+        .article-image {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        &.even td {
+            background-color: #f8f8f8;
+        }
+    }
 </style>
