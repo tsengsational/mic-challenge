@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <article-table :articles="displayArticles" ></article-table>
+    <article-table :articles="displayArticles" v-on:sortChange="sortArticles" ></article-table>
     <button class="more-btn" @click="loadMore" >Load More</button>
   </div>
 </template>
@@ -17,7 +17,8 @@ export default {
     return {
       articles: [],
       displayArticles: [],
-      fetchCount: 0
+      fetchCount: 0,
+      sortBy: ""
     }
   },
   methods: {
@@ -32,7 +33,6 @@ export default {
         )
     },
     loadMore: function() {
-      console.log(this.articles.length, this.fetchCount)
       if (this.articles.length > 0) {
         this.addArticles(10)
       } else if (this.articles.length === 0 && this.fetchCount < 2) {
@@ -48,6 +48,40 @@ export default {
     addArticles: function(num) {
       let addArr = this.articles.splice(0, num)
       this.displayArticles = this.displayArticles.concat(addArr)
+    },
+    sortArticles: function(sortType) {
+      this.sortBy = sortType
+      switch (sortType) {
+        case "words":
+          this.displayArticles.sort(this.compareWords)
+          break;
+        case "submitted":
+          this.displayArticles.sort(this.compareSubmitted)
+          break;
+        default:
+          throw "need sort type"
+          break;
+      }
+    },
+    compareWords: function(a, b) {
+      if (a.words < b.words) {
+        return -1;
+      } else if (a.words > b.words) {
+        return 1;
+      } else {
+        return 0
+      }
+    },
+    compareSubmitted: function(a, b) {
+      let aDate = new Date(a.publish_at)
+      let bDate = new Date(b.publish_at)
+      if (aDate < bDate) {
+        return -1;
+      } else if (aDate > bDate) {
+        return 1;
+      } else {
+        return 0
+      }
     }
   },
   mounted: function() {

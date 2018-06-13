@@ -4,8 +4,8 @@
             <tr>
                 <th>Unpublished Articles ({{articles.length}})</th>
                 <th>Author</th>
-                <th>Words</th>
-                <th>Submitted</th>
+                <th>Words <button @click="$emit('sortChange', 'words')">V</button></th>
+                <th>Submitted <button @click="$emit('sortChange', 'submitted')">V </button> </th>
             </tr>
             <article-row v-for="(article, key) in articles" :key="key" :index="key" :article="article" ></article-row>
         </table>    
