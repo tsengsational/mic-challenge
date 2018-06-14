@@ -1,7 +1,7 @@
 <template>
     <tr class="article-row" :class="{ even: isEven }"  >
         <td><div class="article-title"><div class="article-image" :style="imageStyle" ></div> <span class="title-text" ><a :href="article.url">{{article.title}}</a> </span> </div>  </td>
-        <td><div class="article-author"> {{name}}</div> </td>
+        <td><div class="article-author"> <a href="#">{{name}}</a></div> </td>
         <td><div class="article-words">{{article.words}}</div> </td>
         <td><div class="article-submitted">{{time}}</div> </td>
     </tr>
@@ -59,12 +59,22 @@ export default {
 
 <style lang="scss">
     .article-row {
+        background-color: #f4f4f4;
+        transition: background-color .6s;
+        a {
+            color: #00567e;
+            text-decoration: none;
+            transition: color .3s;
+            &:hover {
+                color: #157cac;
+            }
+        }
         td {
-            padding: 10px;
-            background-color: #f4f4f4;
-            border: 1px #eaeaea solid;
+            padding: 20px 10px;
+            border-bottom: 1px #eaeaea solid;
             vertical-align: middle;
         }
+
         .article-title {
             width: 50vw;
         }
@@ -83,21 +93,16 @@ export default {
         }
 
         .title-text {
-            color: #00567e;
+            
             font-weight: 600;
             position: relative;
             left: 10px;
             font-size: 18px;
             display: inline-block;
             width: calc(100% - 120px);
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
         }
 
         .article-author {
-            color: #00567e;
             font-size: 14px;
             width: 8vw;
         }
@@ -113,15 +118,13 @@ export default {
             vertical-align: top;
         }
 
-        &.even td {
+        &.even {
             background-color: #f8f8f8;
         }
     }
-    tr.article-row {
-        height: 70px;
-        transition: height .3s;
-    }
-    tr.article-row:hover {
-        height: 90px;
-    }
+
+     .article-row:hover, .article-row.even:hover {
+            background-color: #d6d6d6;
+        }
+
 </style>

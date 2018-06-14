@@ -48,7 +48,7 @@ export default {
               } 
             ) 
       } else {
-          throw "no more articles"
+          alert("No more articles. :(")
       }
     },
     addArticles: function(num) {
@@ -57,13 +57,16 @@ export default {
     },
     sortArticles: function(sortType) {
       this.sortBy = sortType
+      window.localStorage.setItem("micSortBy", sortType)
       switch (sortType) {
         case "words":
           this.sortWordsAsc = !this.sortWordsAsc
+          window.localStorage.setItem("micSortWordsAsc", this.sortWordsAsc)
           this.sortWordsAsc ? this.displayArticles.sort(this.compareWords) : this.displayArticles.sort(this.compareWordsReverse)
           break;
         case "submitted":
           this.sortSubAsc = !this.sortSubAsc
+          window.localStorage.setItem("micSortSubAsc", this.sortSubAsc)
           this.sortSubAsc ? this.displayArticles.sort(this.compareSubmitted) : this.displayArticles.sort(this.compareSubmittedReversed)
           break;
         default:
@@ -110,13 +113,33 @@ export default {
       } else {
         return 0
       }
+    },
+    getPastSort: function() {
+      let sortWordsAsc = window.localStorage.getItem("micSortWordsAsc") === "true" ? true : false
+      let sortSubAsc = window.localStorage.getItem("micSortSubAsc") === "true" ? true : false
+      let sortType = window.localStorage.getItem("micSortBy")
+      return {
+        sortWordsAsc, sortSubAsc, sortType
+      }
     }
   },
   mounted: function() {
     let url = "/articles.json"
     this.getArticles(url)
       .then (()=> {
+        let store = this.getPastSort()
         this.loadMore()
+        if (store.sortType) {
+          if(store.sortSubAsc === null) {null} 
+          else {
+            this.sortSubAsc = !store.sortSubAsc
+          }
+          if(store.sortWordsAsc === null) {null} 
+          else {
+            this.sortWordsAsc = !store.sortWordsAsc
+          }
+          this.sortArticles(store.sortType)
+        }
       }
       )
   }
@@ -141,19 +164,21 @@ body {
   width: 160px;
   height: 60px;
   font-size: 16px;
-  background: linear-gradient(#c21e46, #8b1130);
-  border-radius: 10px;
-  border: 3px #8b1130 solid;
+  background-color: #fff;
+  border: 2px #014768 solid;
+  color: #00567e;
   margin: 16px 0;
-  color: #fff;
   text-transform: uppercase;
   font-weight: 600;
-  right: 0%;
+  right: 0;
   position: absolute;
+  transition: background-color .3s, color .3s;
 
-  &:active {
-    background: linear-gradient(#8b1130, #560b1d)
+  &:hover {
+    background-color: #00567e;
+    color: #fff;
   }
+
 }
 
 .btn-container {
@@ -162,7 +187,7 @@ body {
   left: 10vw;
   top: 59px;
   height: 80px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 
 .hidden {

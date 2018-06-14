@@ -43,11 +43,11 @@ export default {
             th {
                 text-align: left;
                 padding: 20px 10px;
-                background: linear-gradient(#c21e46, #8b1130);
+                background: linear-gradient(#157cac, #00567e);
                 color: #fff;
                 text-transform: uppercase;
                 font-weight: 900;
-                border: 1px #8b1130 solid;
+                border-bottom: 1px #00567e solid;
                 z-index: 1;
                 background-clip:padding-box;
                 white-space: nowrap;
@@ -59,13 +59,17 @@ export default {
                 top: 59px;
             }
 
+            .sort-icon {
+                cursor: pointer;
+            }
+
 
             .table-header {
                 position: fixed;
                 top: 0;
                 z-index: 1;
-                background: linear-gradient(#c21e46, #8b1130);
-                width: 80vw;
+                background: linear-gradient(#157cac, #00567e);
+                width: 79vw;
                 .header-title {
                     min-width: 50vw;
                 }
