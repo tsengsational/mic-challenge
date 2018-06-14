@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <article-table :articles="displayArticles" v-on:sortChange="sortArticles" ></article-table>
-    <button class="more-btn" @click="loadMore" >Load More</button>
+    <div class="btn-container" >
+      <button class="more-btn" @click="loadMore" >Load More</button>
+    </div>
   </div>
 </template>
 
@@ -130,9 +132,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  margin: 0;
+}
+
 .more-btn {
   padding: 15px;
-  width: 200px;
+  width: 160px;
   height: 60px;
   font-size: 16px;
   background: linear-gradient(#c21e46, #8b1130);
@@ -142,9 +148,24 @@ export default {
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
+  right: 0%;
+  position: absolute;
 
   &:active {
     background: linear-gradient(#8b1130, #560b1d)
   }
+}
+
+.btn-container {
+  width: 80vw;
+  position: relative;
+  left: 10vw;
+  top: 59px;
+  height: 80px;
+  margin-bottom: 16px;
+}
+
+.hidden {
+  display: none;
 }
 </style>

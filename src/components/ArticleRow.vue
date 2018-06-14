@@ -1,9 +1,9 @@
 <template>
     <tr class="article-row" :class="{ even: isEven }"  >
-        <td class="article-title" ><div class="article-image" :style="imageStyle" ></div> <span class="title-text" ><a :href="article.url">{{article.title}}</a> </span>  </td>
-        <td class="article-author" >{{name}} </td>
-        <td class="article-words" >{{article.words}} </td>
-        <td class="article-submitted" >{{time}} </td>
+        <td><div class="article-title"><div class="article-image" :style="imageStyle" ></div> <span class="title-text" ><a :href="article.url">{{article.title}}</a> </span> </div>  </td>
+        <td><div class="article-author"> {{name}}</div> </td>
+        <td><div class="article-words">{{article.words}}</div> </td>
+        <td><div class="article-submitted">{{time}}</div> </td>
     </tr>
 </template>
 
@@ -63,16 +63,23 @@ export default {
             padding: 10px;
             background-color: #f4f4f4;
             border: 1px #eaeaea solid;
+            vertical-align: middle;
+        }
+        .article-title {
+            width: 50vw;
         }
 
         .article-words {
             text-align: center;
             font-size: 14px;
+            width: 8vw;
+
         }
 
         .article-submitted {
             text-align: center;
             font-size: 14px;
+            width: 8vw;
         }
 
         .title-text {
@@ -92,6 +99,11 @@ export default {
         .article-author {
             color: #00567e;
             font-size: 14px;
+            width: 8vw;
+        }
+
+        .article-submitted {
+            width: 8vw;
         }
 
         .article-image {
@@ -104,5 +116,12 @@ export default {
         &.even td {
             background-color: #f8f8f8;
         }
+    }
+    tr.article-row {
+        height: 70px;
+        transition: height .3s;
+    }
+    tr.article-row:hover {
+        height: 90px;
     }
 </style>
