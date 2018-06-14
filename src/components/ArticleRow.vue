@@ -80,25 +80,24 @@ export default {
         }
 
         .article-words {
-            text-align: center;
             font-size: 14px;
+            text-align: center;
             width: 8vw;
 
         }
 
         .article-submitted {
-            text-align: center;
             font-size: 14px;
+            text-align: center;
             width: 8vw;
         }
 
         .title-text {
-            
-            font-weight: 600;
-            position: relative;
-            left: 10px;
-            font-size: 18px;
             display: inline-block;
+            font-weight: 600;
+            font-size: 18px;
+            left: 10px;
+            position: relative;
             width: calc(100% - 120px);
         }
 

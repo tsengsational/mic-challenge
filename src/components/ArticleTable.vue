@@ -35,23 +35,23 @@ export default {
 
 <style lang="scss">
     .article-table {
-        width: 80vw;
         left: 10vw;
         position: relative;
+        width: 80vw;
         table {
             border-collapse: collapse;
             th {
-                text-align: left;
-                padding: 20px 10px;
                 background: linear-gradient(#157cac, #00567e);
-                color: #fff;
-                text-transform: uppercase;
-                font-weight: 900;
-                border-bottom: 1px #00567e solid;
-                z-index: 1;
                 background-clip:padding-box;
-                white-space: nowrap;
+                border-bottom: 1px #00567e solid;
                 box-sizing: border-box;
+                color: #fff;
+                font-weight: 900;
+                padding: 20px 10px;
+                text-align: left;
+                text-transform: uppercase;
+                white-space: nowrap;
+                z-index: 1;
             }
 
             .table-content {
@@ -65,11 +65,11 @@ export default {
 
 
             .table-header {
+                background: linear-gradient(#157cac, #00567e);
                 position: fixed;
+                width: 79vw;
                 top: 0;
                 z-index: 1;
-                background: linear-gradient(#157cac, #00567e);
-                width: 79vw;
                 .header-title {
                     min-width: 50vw;
                 }

@@ -160,34 +160,34 @@ body {
 }
 
 .more-btn {
-  padding: 15px;
-  width: 160px;
-  height: 60px;
-  font-size: 16px;
   background-color: #fff;
   border: 2px #014768 solid;
   color: #00567e;
-  margin: 16px 0;
-  text-transform: uppercase;
+  height: 60px;
+  font-size: 16px;
   font-weight: 600;
-  right: 0;
+  margin: 16px 0;
+  padding: 15px;
   position: absolute;
+  right: 0;
+  text-transform: uppercase;
   transition: background-color .3s, color .3s;
+  width: 160px;
 
   &:hover {
-    background-color: #00567e;
     color: #fff;
+    background-color: #00567e;
   }
 
 }
 
 .btn-container {
-  width: 80vw;
-  position: relative;
-  left: 10vw;
-  top: 59px;
   height: 80px;
+  left: 10vw;
+  position: relative;
   margin-bottom: 32px;
+  top: 59px;
+  width: 80vw;
 }
 
 .hidden {
